@@ -1,0 +1,63 @@
+from tkinter import *
+def bc(num):
+    global expression
+    expression = expression + str(num)
+    input_text.set(expression)
+def c():
+    global expression
+    expression = ""
+    input_text.set("")
+def eq(*args):
+    try:
+        global expression
+        upper_label.configure(text=str(upper_entry.get()))
+        input_text.set(str(eval(upper_entry.get())))
+        expression = ""
+    except:
+        input_text.set("SyntaxError")
+        expression = ""
+def d():
+    global expression
+    input_text.set(expression[:-1])
+root = Tk()
+root.title("Calculator")
+root.geometry("312x425")
+root.resizable(0,0)
+root.bind("<Return>",eq)
+root.option_add("*font","helvetca 8 bold")
+root.configure(bg="black")
+expression = ""
+upper_frame = Frame(root,width=312,height=50,bd=0)
+upper_frame.pack()
+upper_label = Label(upper_frame,text="MyCalculator",font="helvetca 16 bold",width=50,bg="#333333",fg="#B7B7B7", bd=0,anchor="e")
+upper_label.pack()
+entry_frame = Frame(root,width=312,height=50,bd=0)
+entry_frame.pack()
+input_text = StringVar()
+upper_entry = Entry(entry_frame,textvariable=input_text, width=50, bd=0,justify=RIGHT,font="helvetca 22 bold",bg="#333333",fg="white")
+upper_entry.grid(row=1, column=0)
+upper_entry.pack(ipady=20)
+button_frame = Frame(root,width=312, height=272.5,bd=0,bg="gray")
+button_frame.pack()
+button_ac = Button(button_frame,text="AC",command = lambda : c(),width = 10, height = 4,fg="orange",cursor = "hand2",bd = 0).grid(row = 0, column = 0, padx = 1, pady = 1)
+button_backspace = Button(button_frame,text="<==",command = lambda : d(),width = 10, height = 4,fg="orange",cursor = "hand2",bd = 0).grid(row = 0, column = 1, padx = 1, pady = 1)
+button_dot = Button(button_frame,text=".",command = lambda: bc("."),width = 10, height = 4,fg="black",cursor = "hand2",bd = 0).grid(row = 0, column = 2, padx = 1, pady = 1)
+button_divide = Button(button_frame,text="/",command = lambda: bc("/"),width = 10, height = 4,fg="black",cursor = "hand2",bd = 0).grid(row = 0, column = 3, padx = 1, pady = 1)
+button_7 = Button(button_frame,text="7",command = lambda: bc(7),width = 10, height = 4,fg="black",cursor = "hand2",bd = 0).grid(row = 1, column = 0, padx = 1, pady = 1)
+button_8 = Button(button_frame,text="8",command = lambda: bc(8),width = 10, height = 4,fg="black",cursor = "hand2",bd = 0).grid(row = 1, column = 1, padx = 1, pady = 1)
+button_9 = Button(button_frame,text="9",command = lambda: bc(9),width = 10, height = 4,fg="black",cursor = "hand2",bd = 0).grid(row = 1, column = 2, padx = 1, pady = 1)
+button_x = Button(button_frame,text="*",command = lambda: bc("*"),width = 10, height = 4,fg="black",cursor = "hand2",bd = 0).grid(row = 1, column = 3, padx = 1, pady = 1)
+button_4 = Button(button_frame,text="4",command = lambda: bc(4),width = 10, height = 4,fg="black",cursor = "hand2",bd = 0).grid(row = 2, column = 0, padx = 1, pady = 1)
+button_5 = Button(button_frame,text="5",command = lambda: bc(5),width = 10, height = 4,fg="black",cursor = "hand2",bd = 0).grid(row = 2, column = 1, padx = 1, pady = 1)
+button_6 = Button(button_frame,text="6",command = lambda: bc(6),width = 10, height = 4,fg="black",cursor = "hand2",bd = 0).grid(row = 2, column = 2, padx = 1, pady = 1)
+button_minus = Button(button_frame,text="-",command = lambda: bc("-"),width = 10, height = 4,fg="black",cursor = "hand2",bd = 0).grid(row = 2, column = 3, padx = 1, pady = 1)
+button_1 = Button(button_frame,text="1",command = lambda: bc(1),width = 10, height = 4,fg="black",cursor = "hand2",bd = 0).grid(row = 3, column = 0, padx = 1, pady = 1)
+button_2 = Button(button_frame,text="2",command = lambda: bc(2),width = 10, height = 4,fg="black",cursor = "hand2",bd = 0).grid(row = 3, column = 1, padx = 1, pady = 1)
+button_3 = Button(button_frame,text="3",command = lambda: bc(3),width = 10, height = 4,fg="black",cursor = "hand2",bd = 0).grid(row = 3, column = 2, padx = 1, pady = 1)
+button_plus = Button(button_frame,text="+",command = lambda: bc("+"),width = 10, height = 4,fg="black",cursor = "hand2",bd = 0).grid(row = 3, column = 3, padx = 1, pady = 1)
+button_open = Button(button_frame,text="(",command = lambda: bc("("),width = 10, height = 4,fg="black",cursor = "hand2",bd = 0).grid(row = 4, column = 0, padx = 1, pady = 1)
+button_0 = Button(button_frame,text="0",command = lambda: bc(0),width = 10, height = 4,fg="black",cursor = "hand2",bd = 0).grid(row = 4, column = 1,padx = 1, pady = 1)
+button_close = Button(button_frame,text=")",command = lambda: bc(")"),width = 10, height = 4,fg="black",cursor = "hand2",bd = 0).grid(row = 4, column = 2, padx = 1, pady = 1)
+button_eq = Button(button_frame,text="=",command = lambda: eq(),width = 10, height = 4,fg="white",bg="orange",cursor = "hand2",bd = 0).grid(row = 4, column = 3 ,padx = 1, pady = 1)
+
+root.mainloop()
