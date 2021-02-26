@@ -1,29 +1,50 @@
 from tkinter import *
+import random
 def bc(num):
     global expression
-    expression = expression + str(num)
-    input_text.set(expression)
+    if expression != "":
+        if (num!="+" or num!="-" or num!="*" or num!="/"or num!=".") and num!=expression[-1] :
+            expression = expression + str(num)
+            input_text.set(expression)
+    else:
+        expression = expression + str(num)
+        input_text.set(expression)
 def c():
     global expression
     expression = ""
     input_text.set("")
-def eq(*args):
-    try:
+def eq(*augs):
+    #try:
         global expression
-        upper_label.configure(text=str(upper_entry.get()))
-        input_text.set(str(eval(upper_entry.get())))
+        if  len(expression)==3 or (expression[expression.find("(")-1] == "+" or expression[expression.find("(")-1] == "-" or expression[expression.find("(")-1] == "/" or expression[expression.find(")")+2] == "+" or expression[expression.find(")")+2] == "-" or expression[expression.find(")")+2] == "/" )is False:
+            if expression[0] != "(":
+                if expression.find("(") != -1:
+                    index = expression.find("(")
+                    expression = expression[:index] + "*" + expression[index:]
+            if expression[-1]!=")":
+                if expression.find(")") != -1:
+                    index = expression.find(")")+1
+                    expression = expression[:index] + "*" + expression[index:]
+        upper_label.configure(text=str(expression))
+        input_text.set(str(eval(expression)))
         expression = ""
-    except:
-        input_text.set("SyntaxError")
-        expression = ""
+    #except:
+     #   input_text.set("SyntaxError")
+      #  expression = ""
 def d():
     global expression
-    input_text.set(expression[:-1])
+    expression=expression[:-1]
+    input_text.set(expression)
 root = Tk()
 root.title("Calculator")
 root.geometry("312x425")
 root.resizable(0,0)
 root.bind("<Return>",eq)
+menubar = Menu(root)
+filemenu = Menu(menubar, tearoff=0)
+filemenu.add_command(label="Exit", command=root.quit)
+menubar.add_cascade(label="File", menu=filemenu)
+root.config(menu=menubar)
 root.option_add("*font","helvetca 8 bold")
 root.configure(bg="black")
 expression = ""
